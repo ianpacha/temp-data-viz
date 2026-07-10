@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Climate Reality Leaders — Stories Preview (SAMPLE)</title>
+<style>
+  :root {
+    --p-bright:  #C0D110;
+    --p-mid:     #8DC63F;
+    --p-pale:    #D4DF9B;
+    --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono: 'SF Mono', Menlo, Consolas, monospace;
+    --text: #E6E6E6;
+    --text-muted: rgba(230, 230, 230, 0.7);
+    --panel-bg: rgba(8, 16, 32, 0.72);
+    --panel-border: rgba(140, 180, 230, 0.22);
+    --dot-origin: #8DC63F;
+    --dot-dest:   #D4DF9B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #03060c;
+    color: var(--text);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    height: 100vh;
+  }
+  #earth-container { width: 100%; height: 100%; position: relative; }
+  canvas { display: block; }
+
+  /* ===== HUD ===== */
+  .hud-logo { position: absolute; top: 28px; left: 28px; }
+  .hud-logo img { height: 60px; width: auto; display: block; object-fit: contain; }
+
+  .hud-stats {
+    position: absolute; top: 32px; right: 36px;
+    text-align: right; font-family: var(--font-mono);
+  }
+  .hud-stats .stat-row { margin-bottom: 8px; }
+  .hud-stats .stat-value {
+    font-size: 24px; font-weight: 500; color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .hud-stats .stat-label {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text-muted);
+  }
+
+  .legend {
+    position: absolute; top: 100px; left: 36px;
+    font-size: 11px; font-family: var(--font-mono);
+    color: var(--text-muted); line-height: 2.1;
+  }
+  .legend .swatch {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .legend .swatch.org-ring {
+    background: #FFC500; border-radius: 2px; transform: rotate(45deg);
+    width: 9px; height: 9px;
+  }
+  .legend .swatch.org-bead { background: #FFC500; }
+  .legend .legend-section {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-muted); margin-top: 12px; margin-bottom: 2px; opacity: 0.7;
+  }
+
+  /* ===== TOOLTIP ===== */
+  .tooltip {
+    display: none; position: absolute;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 4px; padding: 10px 14px;
+    max-width: 240px; pointer-events: none;
+    backdrop-filter: blur(8px); z-index: 100;
+  }
+  .tooltip.visible { display: block; }
+  .tooltip .tt-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .tooltip .tt-stat  { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .tooltip .tt-stat strong { color: var(--p-bright); font-family: var(--font-mono); }
+
+  /* ===== Toggles ===== */
+  .dots-toggle, .org-toggle {
+    position: absolute; left: 36px;
+    display: flex; align-items: center; gap: 7px;
+    background: none; border: 1px solid var(--text-muted);
+    border-radius: 20px; padding: 5px 14px;
+    color: var(--text-muted); font-size: 10px;
+    font-family: var(--font-mono); letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .dots-toggle:hover, .org-toggle:hover { color: var(--text); border-color: var(--text); }
+  .dots-toggle .dot, .org-toggle .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    opacity: 0.35; transition: opacity 0.3s;
+  }
+  .dots-toggle .dot { background: #8DC63F; }
+  .org-toggle  .dot { background: #FFC500; }
+  .dots-toggle.active, .org-toggle.active { color: var(--text); border-color: var(--text); }
+  .dots-toggle.active .dot, .org-toggle.active .dot { opacity: 1; }
+  .dots-toggle { bottom: 64px; }
+  .org-toggle  { bottom: 28px; }
+
+  .instructions {
+    position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; color: var(--text-muted);
+    opacity: 0.55; font-family: var(--font-mono); letter-spacing: 0.5px;
+  }
+
+  /* ===== Phone layout ===== */
+  @media (max-width: 640px) {
+    .hud-logo { top: 14px; left: 14px; }
+    .hud-logo img { height: 38px; }
+    .hud-stats { top: 14px; right: 14px; }
+    .hud-stats .stat-value { font-size: 17px; }
+    .hud-stats .stat-label { font-size: 8px; letter-spacing: 1px; }
+    .legend { top: 64px; left: 14px; font-size: 9px; line-height: 1.85; }
+    .legend .swatch { width: 8px; height: 8px; margin-right: 5px; }
+    .dots-toggle, .org-toggle {
+      left: 14px; font-size: 8.5px; padding: 4px 9px; letter-spacing: 0.5px; gap: 5px;
+    }
+    .org-toggle  { bottom: calc(env(safe-area-inset-bottom, 0px) + 60px); }
+    .dots-toggle { bottom: calc(env(safe-area-inset-bottom, 0px) + 94px); }
+    .dots-toggle .dot, .org-toggle .dot { width: 7px; height: 7px; }
+    .instructions { display: none; }
+    .tooltip { max-width: 200px; padding: 9px 12px; }
+  }
+
+  /* ===== Light theme overrides (body[data-style="light"]) ===== */
+  body[data-style="light"] {
+    --text: #10502F;
+    --text-muted: rgba(16, 80, 47, 0.7);
+    --panel-bg: rgba(244, 245, 236, 0.82);
+    --panel-border: rgba(16, 80, 47, 0.2);
+    --dot-origin: #C0D110;
+    --dot-dest:   #457428;
+  }
+
+  /* Logo: white logo on the dark/earth/live backgrounds, black on light. */
+  .hud-logo .logo-light { display: none; }
+  .hud-logo .logo-dark  { display: block; }
+  body[data-style="light"] .hud-logo .logo-light { display: block; }
+  body[data-style="light"] .hud-logo .logo-dark  { display: none; }
+
+  /* ===== Style picker (Light | Dark | Earth | Live) ===== */
+  .style-picker {
+    position: absolute; bottom: 28px; right: 36px;
+    display: flex; gap: 2px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 20px; padding: 3px;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+  .style-picker button {
+    background: transparent; border: none;
+    padding: 4px 11px; color: var(--text-muted);
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 1px; text-transform: uppercase;
+    border-radius: 16px; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .style-picker button:hover { color: var(--text); }
+  .style-picker button.active {
+    background: rgba(140, 180, 230, 0.22);
+    color: var(--text);
+  }
+  body[data-style="light"] .style-picker button.active { background: rgba(16, 80, 47, 0.12); }
+
+  @media (max-width: 640px) {
+    .style-picker {
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 60px);
+      right: 14px; padding: 2px;
+    }
+    .style-picker button { font-size: 8px; padding: 3px 8px; }
+  }
+
+  /* ===== SAMPLE ribbon — make clear this is placeholder content ===== */
+  .sample-ribbon {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    background: #FFC500; color: #10502F;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 18px; border-radius: 0 0 8px 8px; z-index: 300;
+  }
+
+  /* ===== Story card — Climate Clips aesthetic (cream + navy + green) ===== */
+  .story-card {
+    --cc-navy:    #1c3d5f;
+    --cc-green:   #2d7d4a;
+    --cc-green-2: #3e9a5a;
+    --cc-cream:   #f4efde;
+    --cc-cream-2: #e8e3d1;
+    --cc-ink:     #1c3d5f;
+    --cc-ink-soft:#5a6a82;
+    --cc-rule:    rgba(28, 61, 95, 0.12);
+
+    /* Popover anchored near the clicked pin. Position is set inline by JS. */
+    position: fixed;
+    width: 360px; max-width: 92vw;
+    max-height: calc(100vh - 80px);
+    background: var(--cc-cream);
+    color: var(--cc-ink);
+    border: 1px solid var(--cc-rule);
+    border-radius: 12px;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.45), 0 6px 14px rgba(0,0,0,0.25);
+    opacity: 0; transform: scale(0.92) translateY(4px);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(.2,.8,.2,1);
+    z-index: 250; overflow-y: auto;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .story-card.open { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+  .story-card .sc-close {
+    position: absolute; top: 10px; right: 12px; z-index: 4;
+    background: var(--cc-navy); color: #fff; border: none;
+    width: 26px; height: 26px; border-radius: 50%;
+    font-size: 16px; line-height: 1; cursor: pointer;
+  }
+
+  /* Hero: compact for popover, with green tag chip + caption */
+  .sc-hero {
+    position: relative; width: 100%; height: 140px;
+    border-radius: 12px 12px 0 0;
+    background:
+      linear-gradient(180deg, transparent 50%, rgba(28,61,95,0.85) 100%),
+      linear-gradient(135deg, #cfd6c8 0 50%, #b7c2ae 50% 100%);
+    background-size: cover; background-position: center;
+  }
+  .sc-hero .sc-badge {
+    position: absolute; top: 18px; left: 18px;
+    background: var(--cc-green); color: #fff;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1.6px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 3px;
+  }
+  .sc-hero .sc-herocap {
+    position: absolute; bottom: 14px; left: 20px; right: 20px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; letter-spacing: 1.4px;
+    text-transform: uppercase; color: rgba(255,255,255,0.78);
+  }
+
+  .sc-body { padding: 18px 20px 24px; }
+
+  /* Eyebrow above the title (Climate Clips: small uppercase letter-spaced) */
+  .sc-meta {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--cc-green);
+    margin-bottom: 6px;
+  }
+  .sc-name {
+    font-size: 22px; font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.005em;
+    color: var(--cc-navy);
+    margin-bottom: 14px;
+  }
+
+  /* Fact chips: cream pills with navy text */
+  .sc-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .sc-fact {
+    background: #fff; border: 1px solid var(--cc-rule);
+    border-radius: 6px; padding: 10px 14px;
+  }
+  .sc-fact .v {
+    font-size: 17px; font-weight: 700;
+    color: var(--cc-navy); font-family: 'SF Mono', Menlo, Consolas, monospace;
+    letter-spacing: -0.01em;
+  }
+  .sc-fact .k {
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--cc-ink-soft); margin-top: 4px;
+  }
+
+  /* Pull quote */
+  .sc-quote {
+    font-size: 15px; font-style: normal; font-weight: 500;
+    line-height: 1.4; color: var(--cc-navy);
+    border-left: 3px solid var(--cc-green);
+    padding: 2px 0 2px 12px;
+    margin: 6px 0 14px;
+  }
+  .sc-text {
+    font-size: 12.5px; line-height: 1.55; color: var(--cc-ink-soft);
+    margin-bottom: 16px;
+  }
+
+  /* Section eyebrow used before "By the numbers" / Multimedia / Connected to */
+  .sc-mediahead {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cc-green);
+    margin: 0 0 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--cc-rule);
+  }
+
+  /* "By the numbers" fact box: white with navy values */
+  .sc-factbox {
+    background: #fff; border: 1px solid var(--cc-rule);
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 26px;
+  }
+  .sc-factbox h4 {
+    margin: 0 0 10px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cc-green); font-weight: 700;
+  }
+  .sc-factbox .row {
+    display: flex; justify-content: space-between;
+    font-size: 14px; padding: 5px 0; color: var(--cc-ink);
+    border-bottom: 1px solid var(--cc-rule);
+  }
+  .sc-factbox .row:last-child { border-bottom: none; }
+  .sc-factbox .row span:last-child {
+    color: var(--cc-navy); font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-weight: 600;
+  }
+
+  /* Multimedia thumbnails */
+  .sc-media {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 26px;
+  }
+  .sc-thumb {
+    aspect-ratio: 1/1; border-radius: 6px;
+    background: linear-gradient(135deg, #d9d3bf 0 50%, #c9c3ad 50% 100%);
+    border: 1px solid var(--cc-rule);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; color: var(--cc-navy);
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .sc-thumb .ic { font-size: 22px; color: var(--cc-green); opacity: 0.9; }
+
+  /* Tags (Climate Clips chip style — green outline) */
+  .sc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sc-tag {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--cc-green);
+    border: 1px solid var(--cc-green); border-radius: 999px;
+    padding: 3px 11px;
+    background: rgba(45,125,74,0.06);
+  }
+
+  /* Cross-reference chip type dots */
+  .lk-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .lk-dot.t-leader     { background: var(--cc-navy); }
+  .lk-dot.t-branch     { background: #FFC500; border-radius: 2px; transform: rotate(45deg); }
+  .lk-dot.t-hub        { background: #FFC500; }
+  .lk-dot.t-chapter    { background: #FFC500; opacity: 0.6; }
+  .lk-dot.t-win        { background: var(--cc-green); }
+  .lk-dot.t-highlight  { background: var(--cc-green-2); }
+  .lk-dot.t-case_study { background: var(--cc-navy); opacity: 0.6; }
+
+  /* "Connected to" chips */
+  .sc-links-box { margin-bottom: 26px; }
+  .sc-links-list { display: flex; flex-direction: column; gap: 8px; }
+  .sc-link {
+    display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+    background: #fff; border: 1px solid var(--cc-rule);
+    color: var(--cc-navy); border-radius: 8px; padding: 10px 14px;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+  }
+  .sc-link:hover { background: rgba(45,125,74,0.06); border-color: var(--cc-green); }
+  .sc-link .rel {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--cc-green); min-width: 92px;
+  }
+  .sc-link .lk-title { flex: 1; font-size: 14px; font-weight: 500; }
+  .sc-link .lk-type {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--cc-ink-soft);
+  }
+
+  @media (max-width: 700px) {
+    .story-card { width: calc(100vw - 24px); max-width: calc(100vw - 24px); }
+    .sc-body { padding: 16px 18px 22px; }
+    .sc-hero { height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="earth-container">
+
+  <div class="hud-logo">
+    <img class="logo-light" src="logo-black.png" alt="Climate Reality Project logo" />
+    <img class="logo-dark"  src="logo.png"       alt="Climate Reality Project logo" />
+  </div>
+
+  <div class="sample-ribbon">Sample preview · placeholder stories</div>
+
+  <div class="story-card" id="story-card">
+    <button class="sc-close" id="sc-close">&times;</button>
+    <div class="sc-hero" id="sc-hero">
+      <span class="sc-badge">Leader story</span>
+      <div class="sc-herocap" id="sc-herocap">Photo placeholder</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-name" id="sc-name"></div>
+      <div class="sc-meta" id="sc-meta"></div>
+
+      <div class="sc-facts" id="sc-facts"></div>
+
+      <div class="sc-quote" id="sc-quote"></div>
+      <div class="sc-text" id="sc-text"></div>
+
+      <div class="sc-mediahead">Multimedia</div>
+      <div class="sc-media">
+        <div class="sc-thumb"><span class="ic">&#9658;</span>Video</div>
+        <div class="sc-thumb"><span class="ic">&#9673;</span>Map</div>
+        <div class="sc-thumb"><span class="ic">&#9635;</span>Gallery</div>
+      </div>
+
+      <div class="sc-links-box" id="sc-links" style="display:none">
+        <div class="sc-mediahead">Connected to</div>
+        <div class="sc-links-list"></div>
+      </div>
+
+      <div class="sc-tags" id="sc-tags"></div>
+    </div>
+  </div>
+
+  <div class="hud-stats">
+    <div class="stat-row">
+      <div class="stat-value" id="stat-leaders">54,558</div>
+      <div class="stat-label">Leaders trained</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-value" id="stat-countries">195</div>
+      <div class="stat-label">Countries</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-section">Trainings</div>
+    <span class="swatch" style="background:var(--dot-origin);"></span>Training city<br>
+    <span class="swatch" style="background:var(--dot-origin); opacity:0.45;"></span>Virtual training<br>
+    <span class="swatch" style="background:var(--dot-dest);"></span>Leader location<br>
+    <div class="legend-section">Organization</div>
+    <span class="swatch org-ring"></span>Branch<br>
+    <span class="swatch org-bead"></span>Chapter &middot; Hub
+  </div>
+
+  <button class="dots-toggle active" id="dots-toggle"><span class="dot"></span>Trainings &amp; leaders</button>
+
+  <div class="style-picker" id="style-picker">
+    <button data-style="light">Light</button>
+    <button data-style="dark">Dark</button>
+    <button data-style="earth">Earth</button>
+    <button data-style="live" class="active">Live</button>
+  </div>
+
+  <div class="tooltip" id="tooltip">
+    <div class="tt-title"></div>
+    <div class="tt-stat"></div>
+  </div>
+
+
+  <div class="instructions">drag to rotate &middot; click a pin to open its card &middot; cards link to each other</div>
+
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="org-markers.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ─── Scene ─────────────────────────────────────────────────────────────────
+  const container = document.getElementById('earth-container');
+  let W = container.clientWidth, H = container.clientHeight;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x03060c);
+
+  const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 1000);
+  camera.position.z = 2.6;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.insertBefore(renderer.domElement, container.firstChild);
+
+  // ─── Lighting (front-lit so the visible hemisphere always reads) ──────────
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const sun = new THREE.DirectionalLight(0xffffff, 1.05);
+  sun.position.set(5, 3, 5);
+  scene.add(sun);
+
+  // ─── Earth ─────────────────────────────────────────────────────────────────
+  const RADIUS = 1;
+  const earthGroup = new THREE.Group();
+  scene.add(earthGroup);
+
+  const texLoader = new THREE.TextureLoader();
+  texLoader.crossOrigin = 'anonymous';
+  const TEX = 'textures/';
+  const earthMat = new THREE.MeshStandardMaterial({
+    map:          texLoader.load(TEX + 'earth_atmos_2048.jpg'),
+    normalMap:    texLoader.load(TEX + 'earth_normal_2048.jpg'),
+    roughnessMap: texLoader.load(TEX + 'earth_specular_2048.jpg'),
+    roughness:    0.85,
+    metalness:    0.02,
+  });
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 96, 96), earthMat);
+  earthGroup.add(earth);
+
+  // ─── Stylized ocean + graticule + topojson land lines (for Light/Dark) ────
+  // Hidden until setStyle('light'|'dark'); the textured Earth covers the sphere
+  // in Earth/Live modes so we hide these to avoid z-fighting.
+  const oceanMat = new THREE.MeshBasicMaterial({ color: 0x10502F });
+  const oceanMesh = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 80, 80), oceanMat);
+  oceanMesh.visible = false;
+  earthGroup.add(oceanMesh);
+
+  const gratMat = new THREE.MeshBasicMaterial({
+    color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 0.05
+  });
+  const gratMesh = new THREE.Mesh(new THREE.SphereGeometry(RADIUS * 1.001, 36, 18), gratMat);
+  gratMesh.visible = false;
+  earthGroup.add(gratMesh);
+
+  const landGroup = new THREE.Group();
+  landGroup.visible = false;
+  earthGroup.add(landGroup);
+
+  // ─── Clouds (Live mode only) ──────────────────────────────────────────────
+  const cloudsMat = new THREE.MeshLambertMaterial({
+    map: texLoader.load(TEX + 'earth_clouds_1024.png'),
+    transparent: true, opacity: 0.55, depthWrite: false
+  });
+  const cloudsMesh = new THREE.Mesh(new THREE.SphereGeometry(RADIUS * 1.006, 64, 64), cloudsMat);
+  cloudsMesh.visible = false;
+  earthGroup.add(cloudsMesh);
+
+  // Lat/lon -> 3D point on the sphere. Matches the texture orientation.
+  function latLonToVec3(lat, lon, r) {
+    const phi   = (90 - lat) * Math.PI / 180;
+    const theta = (lon + 180) * Math.PI / 180;
+    return new THREE.Vector3(
+      -r * Math.sin(phi) * Math.cos(theta),
+       r * Math.cos(phi),
+       r * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  // Populate landGroup once the world atlas is fetched (used for Light/Dark).
+  fetch('data/countries-110m.geojson')
+    .then(r => r.json())
+    .then(countries => {
+      countries.features.forEach(feature => {
+        const coords = feature.geometry.type === 'Polygon'
+          ? [feature.geometry.coordinates]
+          : feature.geometry.coordinates;
+        coords.forEach(polygon => {
+          polygon.forEach(ring => {
+            const points = ring.map(([lon, lat]) => latLonToVec3(lat, lon, RADIUS * 1.001));
+            if (points.length < 3) return;
+            const geo = new THREE.BufferGeometry().setFromPoints(points);
+            const mat = new THREE.LineBasicMaterial({ color: 0x56892F, transparent: true, opacity: 0.6 });
+            landGroup.add(new THREE.Line(geo, mat));
+          });
+        });
+      });
+      applyStyleColors();   // recolor land lines to match the current style
+    })
+    .catch(() => {});
+
+  // ─── Earth style picker (Light / Dark / Earth / Live) ──────────────────────
+  // Each style swaps which meshes are visible + adjusts colours, lighting and
+  // background. Live mode also aims the directional light at the real-world
+  // subsolar point so the day/night terminator matches the actual time.
+  const STYLES = {
+    light: { bg: 0xF4F5EC, ocean: 0xF4F5EC, landStroke: 0xB5C47A, gratColor: 0x10502F, gratOpacity: 0.06, origin: 0xC0D110, dest: 0x457428, useTexture: false, clouds: false, ambient: 0.85, directional: 0.0 },
+    dark:  { bg: 0x10502F, ocean: 0x10502F, landStroke: 0x56892F, gratColor: 0xFFFFFF, gratOpacity: 0.05, origin: 0x8DC63F, dest: 0xD4DF9B, useTexture: false, clouds: false, ambient: 0.85, directional: 0.0 },
+    earth: { bg: 0x03060c,                                                                                origin: 0x8DC63F, dest: 0xD4DF9B, useTexture: true,  clouds: false, ambient: 0.60, directional: 1.00, sun: 'fixed' },
+    live:  { bg: 0x000308,                                                                                origin: 0x8DC63F, dest: 0xD4DF9B, useTexture: true,  clouds: true,  ambient: 0.12, directional: 1.60, sun: 'realtime' },
+  };
+  let currentStyle = 'earth';
+  const ambientLight = scene.children.find(c => c.isAmbientLight);
+
+  // Subsolar point (lat, lon) from current UTC time -> unit vector. Drives the
+  // sun direction in Live mode so the lit hemisphere matches "now."
+  function sunDirection() {
+    const now = new Date();
+    const start = Date.UTC(now.getUTCFullYear(), 0, 0);
+    const dayOfYear = Math.floor((now.getTime() - start) / 86400000);
+    const declination = 23.44 * Math.sin((360 / 365) * (dayOfYear - 81) * Math.PI / 180);
+    const utcHour = now.getUTCHours() + now.getUTCMinutes() / 60 + now.getUTCSeconds() / 3600;
+    const hourAngle = 15 * (utcHour - 12);   // degrees, +ve = west of prime meridian
+    return latLonToVec3(declination, -hourAngle, 1);
+  }
+
+  function applyStyleColors() {
+    const s = STYLES[currentStyle];
+    if (s.ocean !== undefined) oceanMat.color.setHex(s.ocean);
+    if (s.gratColor !== undefined) { gratMat.color.setHex(s.gratColor); gratMat.opacity = s.gratOpacity; }
+    if (s.landStroke !== undefined) {
+      landGroup.children.forEach(line => { if (line.material) line.material.color.setHex(s.landStroke); });
+    }
+    originDots.forEach(d => d.material.color.setHex(s.origin));
+    destDots.forEach(d => d.material.color.setHex(s.dest));
+  }
+
+  function setStyle(style) {
+    if (!STYLES[style]) return;
+    currentStyle = style;
+    const s = STYLES[style];
+
+    scene.background = new THREE.Color(s.bg);
+    document.body.dataset.style = style;
+
+    // Mesh visibility per mode.
+    earth.visible      = !!s.useTexture;
+    oceanMesh.visible  = !s.useTexture;
+    gratMesh.visible   = !s.useTexture;
+    landGroup.visible  = !s.useTexture;
+    cloudsMesh.visible = !!s.clouds;
+
+    // Lighting per mode.
+    if (ambientLight) ambientLight.intensity = s.ambient;
+    sun.intensity = s.directional;
+    if (s.sun === 'realtime') sun.position.copy(sunDirection()).multiplyScalar(5);
+    else if (s.sun === 'fixed') sun.position.set(5, 3, 5);
+
+    // Org glow blending: additive looks great over space/dark; normal on light.
+    if (orgLayer) orgLayer.setGlowBlending(style !== 'light');
+
+    applyStyleColors();
+
+    // Update picker chip state.
+    pickerButtons.forEach(b => b.classList.toggle('active', b.dataset.style === style));
+  }
+
+  // ─── Overlays (training dots + org markers) — real data ────────────────────
+  const dotGroup = new THREE.Group();
+  earthGroup.add(dotGroup);
+  const originDots = [], destDots = [];
+  let orgLayer = null, virtualDot = null;
+  let orgShown = true, dotsShown = true;
+
+  function placeDots(events) {
+    const origins = new Map(), dests = new Map();
+    events.forEach(ev => {
+      if (!origins.has(ev.city)) {
+        origins.set(ev.city, {
+          lat: ev.lat, lon: ev.lon, cum: 0,
+          isVirtual: /virtual/i.test(ev.city), date: ev.date
+        });
+      }
+      origins.get(ev.city).cum += ev.leaders;
+      ev.arcs.forEach(arc => {
+        const dk = arc.label || arc.country;
+        if (!dests.has(dk)) dests.set(dk, { lat: arc.lat, lon: arc.lon, cum: 0, country: arc.country });
+        dests.get(dk).cum += arc.count;
+      });
+    });
+
+    const SQ_LO = Math.sqrt(15), HI = 4502, SQ_HI = Math.sqrt(HI);
+    function dotR(n) {
+      if (n > HI) return 0.040;     // outsized generic Virtual
+      const t = Math.max(0, Math.min(1, (Math.sqrt(n) - SQ_LO) / (SQ_HI - SQ_LO)));
+      return Math.max(6, 3 + t * 32) * 0.001;
+    }
+
+    origins.forEach((o, city) => {
+      const isVG = city.trim().toLowerCase() === 'virtual';
+      const r = dotR(o.cum);
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(r, 12, 12),
+        new THREE.MeshBasicMaterial({ color: 0x8DC63F, transparent: true, opacity: o.isVirtual ? 0.55 : 0.95 })
+      );
+      if (isVG) {
+        dot.position.set(RADIUS * 1.55, 0, 0); dot.visible = dotsShown; virtualDot = dot; scene.add(dot);
+      } else {
+        dot.position.copy(latLonToVec3(o.lat, o.lon, RADIUS * 1.012));
+        dotGroup.add(dot);
+      }
+      dot.userData = { type: 'origin', city, leaders: o.cum, isVirtual: o.isVirtual, lat: o.lat, lon: o.lon };
+      originDots.push(dot);
+    });
+
+    dests.forEach((d, key) => {
+      const r = dotR(d.cum);
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(r, 10, 10),
+        new THREE.MeshBasicMaterial({ color: 0xD4DF9B, transparent: true, opacity: 0.85 })
+      );
+      dot.position.copy(latLonToVec3(d.lat, d.lon, RADIUS * 1.008));
+      dot.userData = { type: 'dest', label: key, country: d.country, leaders: d.cum, lat: d.lat, lon: d.lon };
+      dotGroup.add(dot);
+      destDots.push(dot);
+    });
+    applyStyleColors();   // apply current-style dot colours to the freshly-built dots
+  }
+
+  fetch('data/events_v2.json').then(r => r.json()).then(placeDots).catch(() => {});
+  // Org-markers beacon layer intentionally NOT built here — it overlapped the
+  // clickable encyclopedia pins below and intercepted clicks. The encyclopedia
+  // already provides branch/chapter/hub pins (each with its own card).
+
+  // ─── Encyclopedia ──────────────────────────────────────────────────────────
+  // One unified graph: each node is { id, type, title, lat/lon (optional),
+  // facts, links (typed edges -> other ids), tags, consent }.
+  // Gate: consent===true. Types currently rendered: leader / branch / hub /
+  // chapter / win / highlight / case_study (any with a coord becomes a pin).
+  const storyGroup = new THREE.Group();
+  earthGroup.add(storyGroup);
+  const storyPins = [];
+  let focus = null;
+  let ENCY = { nodes: [], byId: {} };
+
+  const TYPE_COLOR = {
+    leader:     { core: 0xFFFFFF, ring: 0xFFC500 },
+    branch:     { core: 0xFFC500, ring: 0xFFC500 },
+    hub:        { core: 0xFFC500, ring: 0xFFFFFF },
+    chapter:    { core: 0xFFC500, ring: 0xFFFFFF },
+    win:        { core: 0x8DC63F, ring: 0xC0D110 },
+    highlight:  { core: 0xC0D110, ring: 0x8DC63F },
+    case_study: { core: 0xD4DF9B, ring: 0x8DC63F },
+  };
+  const TYPE_LABEL = {
+    leader: 'Leader story', branch: 'Branch', hub: 'Hub', chapter: 'Chapter',
+    win: 'Policy win', highlight: 'Highlight', case_study: 'Case study',
+    training: 'Training city', location: 'Leader location'
+  };
+  const REL_LABEL = {
+    based_at: 'Based at', rolls_up_to: 'Part of', home_of: 'Home of',
+    led: 'Led', led_by: 'Led by', happened_in: 'Happened in', site_of: 'Site of',
+    contains: 'Contains', features: 'Features', references: 'References',
+    spans: 'Spans', involves: 'Involves', appears_in: 'Appears in',
+  };
+
+  fetch('data/encyclopedia.json').then(r => r.json()).then(enc => {
+    ENCY.nodes = enc.nodes || [];
+    ENCY.byId  = Object.fromEntries(ENCY.nodes.map(n => [n.id, n]));
+
+    // Build pins for any node with coords (and consent). Per-type size so
+    // branches read as the largest anchors and chapters as smaller dots.
+    const PIN_R = { leader: 0.020, branch: 0.024, hub: 0.018, chapter: 0.014, win: 0.018, highlight: 0.018, case_study: 0.020 };
+    ENCY.nodes.forEach(n => {
+      if (n.consent !== true) return;
+      if (typeof n.lat !== 'number' || typeof n.lon !== 'number') return;
+      const c = TYPE_COLOR[n.type] || TYPE_COLOR.leader;
+      const isLeader = n.type === 'leader';
+      const isBranch = n.type === 'branch';
+      const r = PIN_R[n.type] || 0.014;
+      const pos = latLonToVec3(n.lat, n.lon, RADIUS * 1.02);
+
+      // Branch = octahedron diamond (matches the org-marker design).
+      const geo = isBranch
+        ? new THREE.OctahedronGeometry(r)
+        : new THREE.SphereGeometry(r, 16, 16);
+      const pin = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: c.core }));
+      pin.position.copy(pos);
+      pin.renderOrder = 12;
+      pin.userData = { type: 'enc', node: n };
+      storyGroup.add(pin);
+      storyPins.push(pin);
+
+      // Leaders get a pulsing halo so featured stories stand out.
+      if (isLeader) {
+        const ring = new THREE.Mesh(
+          new THREE.RingGeometry(0.022, 0.032, 28),
+          new THREE.MeshBasicMaterial({ color: c.ring, transparent: true, opacity: 0.95, side: THREE.DoubleSide })
+        );
+        ring.position.copy(pos);
+        ring.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize());
+        ring.userData.isPulse = true;
+        storyGroup.add(ring);
+      }
+    });
+
+  }).catch(() => {});
+
+  function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+  // ─── Unified card renderer (any encyclopedia node) ─────────────────────────
+  const cardEl = document.getElementById('story-card');
+
+  // Place the card popover near the click point, kept within the viewport.
+  function placeCardAt(anchor) {
+    const pad = 12;
+    // Default if no anchor: top-right corner of viewport.
+    if (!anchor) { cardEl.style.left = ''; cardEl.style.top = ''; cardEl.style.right = pad + 'px'; cardEl.style.top = (80) + 'px'; return; }
+    const w = cardEl.offsetWidth  || 360;
+    const h = cardEl.offsetHeight || 420;
+    let x = anchor.x + 18;
+    let y = anchor.y - h / 2;
+    if (x + w > window.innerWidth  - pad) x = anchor.x - w - 18;
+    if (x < pad) x = pad;
+    if (y + h > window.innerHeight - pad) y = window.innerHeight - h - pad;
+    if (y < 60) y = 60;
+    cardEl.style.right = '';
+    cardEl.style.left = x + 'px';
+    cardEl.style.top  = y + 'px';
+  }
+
+  function openCard(n, anchor) {
+    if (!n) return;
+    document.getElementById('sc-name').textContent = n.title || '';
+    document.getElementById('sc-meta').textContent = [TYPE_LABEL[n.type] || n.type, n.subtitle].filter(Boolean).join('  ·  ');
+
+    // Hero badge label by type; image if present, else placeholder pattern.
+    const hero = document.getElementById('sc-hero');
+    const photo = (n.media && n.media.photo_url) || null;
+    hero.style.backgroundImage = photo
+      ? `linear-gradient(180deg, transparent 40%, #0c1622 100%), url(${photo})`
+      : '';
+    document.getElementById('sc-herocap').textContent = photo ? (n.title || '') : 'Sample · photo to come';
+    const badge = document.querySelector('#sc-hero .sc-badge');
+    if (badge) badge.textContent = TYPE_LABEL[n.type] || n.type;
+
+    // Fact chips
+    document.getElementById('sc-facts').innerHTML = (n.facts || [])
+      .filter(f => f && f.v !== '' && f.v != null)
+      .map(f => `<div class="sc-fact"><div class="v">${escapeHtml(f.v)}</div><div class="k">${escapeHtml(f.k)}</div></div>`).join('');
+
+    document.getElementById('sc-quote').textContent = n.summary || '';
+    document.getElementById('sc-text').textContent  = n.body || '';
+
+    // Connected-to chips (cross-references — the encyclopedia heart).
+    const linkBoxEl = document.getElementById('sc-links');
+    if (linkBoxEl) {
+      const links = (n.links || []).filter(l => ENCY.byId[l.id]);
+      linkBoxEl.style.display = links.length ? 'block' : 'none';
+      const chips = links.map(l => {
+        const t = ENCY.byId[l.id];
+        const rel = REL_LABEL[l.rel] || l.rel || '';
+        return `<button class="sc-link" data-id="${t.id}">
+          <span class="rel">${escapeHtml(rel)}</span>
+          <span class="lk-dot t-${t.type}"></span>
+          <span class="lk-title">${escapeHtml(t.title)}</span>
+          <span class="lk-type">${escapeHtml(TYPE_LABEL[t.type] || t.type)}</span>
+        </button>`;
+      }).join('');
+      linkBoxEl.querySelector('.sc-links-list').innerHTML = chips;
+      linkBoxEl.querySelectorAll('.sc-link').forEach(b => b.addEventListener('click', (e) => {
+        const target = ENCY.byId[b.dataset.id];
+        if (target) openCard(target, { x: e.clientX, y: e.clientY });
+      }));
+    }
+
+    // Tags
+    const tagsEl = document.getElementById('sc-tags');
+    tagsEl.innerHTML = '';
+    (n.tags || []).forEach(t => {
+      const el = document.createElement('span'); el.className = 'sc-tag'; el.textContent = t;
+      tagsEl.appendChild(el);
+    });
+
+    // Place the popover near the click (or default if no anchor), then show.
+    placeCardAt(anchor);
+    cardEl.classList.add('open');
+
+    // Zoom to the node on the globe if it has coords.
+    if (typeof n.lat === 'number' && typeof n.lon === 'number') {
+      const v = latLonToVec3(n.lat, n.lon, 1).normalize();
+      const q = new THREE.Quaternion().setFromUnitVectors(v, new THREE.Vector3(0, 0, 1));
+      focus = { quat: q, z: 1.7 };
+      autoRotate = false;
+    }
+  }
+  document.getElementById('sc-close').addEventListener('click', () => {
+    cardEl.classList.remove('open');
+    focus = null;
+    camera.position.z = 2.6;
+  });
+
+  // ─── Interaction: mouse + touch ────────────────────────────────────────────
+  let isDragging = false;
+  let prevPt = { x: 0, y: 0 };
+  let rotVel = { x: 0, y: 0 };
+  let autoRotate = true;
+  let idleTimer = null;
+
+  container.addEventListener('mousedown', (e) => {
+    if (e.target.closest('button')) return;
+    isDragging = true; autoRotate = false; clearTimeout(idleTimer);
+    prevPt = { x: e.clientX, y: e.clientY };
+  });
+  container.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      const dx = e.clientX - prevPt.x, dy = e.clientY - prevPt.y;
+      rotVel.y = dx * 0.004; rotVel.x = dy * 0.004;
+      earthGroup.rotation.y += rotVel.y;
+      earthGroup.rotation.x = Math.max(-1.2, Math.min(1.2, earthGroup.rotation.x + rotVel.x));
+      prevPt = { x: e.clientX, y: e.clientY };
+    }
+    handleHover(e);
+  });
+  container.addEventListener('mouseup',    () => { isDragging = false; idleTimer = setTimeout(() => autoRotate = true, 4000); });
+  container.addEventListener('mouseleave', () => { isDragging = false; clearTimeout(idleTimer); autoRotate = true; hideTooltip(); });
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    camera.position.z = Math.max(1.4, Math.min(5, camera.position.z + e.deltaY * 0.002));
+  }, { passive: false });
+
+  // Touch: one finger rotate, pinch zoom, tap = info.
+  let touchMode = null, pinchD0 = 0, pinchZ0 = 0, tapStart = null;
+  const touchD = (e) => Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+  container.addEventListener('touchstart', (e) => {
+    if (e.target.closest('button')) return;
+    if (e.touches.length === 1) {
+      isDragging = true; autoRotate = false; clearTimeout(idleTimer);
+      prevPt = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      tapStart = { x: prevPt.x, y: prevPt.y, t: Date.now() };
+      touchMode = 'rotate';
+    } else if (e.touches.length === 2) {
+      touchMode = 'pinch'; isDragging = false; tapStart = null;
+      pinchD0 = touchD(e); pinchZ0 = camera.position.z;
+    }
+  }, { passive: true });
+  container.addEventListener('touchmove', (e) => {
+    if (touchMode === 'rotate' && e.touches.length === 1) {
+      e.preventDefault();
+      const t = e.touches[0];
+      const dx = t.clientX - prevPt.x, dy = t.clientY - prevPt.y;
+      earthGroup.rotation.y += dx * 0.005;
+      earthGroup.rotation.x = Math.max(-1.2, Math.min(1.2, earthGroup.rotation.x + dy * 0.005));
+      prevPt = { x: t.clientX, y: t.clientY };
+      if (tapStart && (Math.abs(t.clientX - tapStart.x) > 10 || Math.abs(t.clientY - tapStart.y) > 10)) tapStart = null;
+    } else if (touchMode === 'pinch' && e.touches.length === 2) {
+      e.preventDefault();
+      const d = touchD(e);
+      if (d > 0) camera.position.z = Math.max(1.4, Math.min(5, pinchZ0 * (pinchD0 / d)));
+    }
+  }, { passive: false });
+  container.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+      isDragging = false;
+      if (tapStart && Date.now() - tapStart.t < 300) {
+        if (!tryOpenStoryAt(tapStart.x, tapStart.y)) handleHover({ clientX: tapStart.x, clientY: tapStart.y });
+      }
+      tapStart = null; touchMode = null;
+      idleTimer = setTimeout(() => autoRotate = true, 4000);
+    } else if (e.touches.length === 1) {
+      touchMode = 'rotate'; isDragging = true;
+      prevPt = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  }, { passive: false });
+
+  // ─── Hover / tap tooltip ───────────────────────────────────────────────────
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const tooltipEl = document.getElementById('tooltip');
+  function pickables() {
+    return [...storyPins, ...originDots, ...destDots];
+  }
+  // Turn a training-city / leader-location dot into a card node on the fly.
+  function dotToNode(d) {
+    if (d.type === 'origin') {
+      return {
+        type: 'training', title: d.city,
+        subtitle: d.isVirtual ? 'Virtual training' : 'Training city',
+        lat: d.lat, lon: d.lon,
+        facts: [
+          { k: 'Leaders trained', v: d.leaders.toLocaleString() },
+          { k: 'Format', v: d.isVirtual ? 'Virtual' : 'In person' },
+        ],
+        summary: `${d.leaders.toLocaleString()} leaders were trained ${d.isVirtual ? 'online from ' : 'in '}${d.city}.`,
+        tags: ['training', d.isVirtual ? 'virtual' : 'in-person'], consent: true,
+      };
+    }
+    return {
+      type: 'location', title: d.label,
+      subtitle: 'Where leaders are', lat: d.lat, lon: d.lon,
+      facts: [
+        { k: 'Leaders from here', v: d.leaders.toLocaleString() },
+        { k: 'Country', v: d.country || '' },
+      ],
+      summary: `${d.leaders.toLocaleString()} trained leaders are based in ${d.label}.`,
+      tags: ['leaders'], consent: true,
+    };
+  }
+
+  // Raycast at a screen point; open a card for a story pin OR a training/
+  // leader dot. Returns true if something was hit.
+  function tryOpenStoryAt(clientX, clientY) {
+    mouse.x = (clientX / W) * 2 - 1;
+    mouse.y = -(clientY / H) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const anchor = { x: clientX, y: clientY };
+    let hits = raycaster.intersectObjects(storyPins);
+    if (hits.length > 0) { openCard(hits[0].object.userData.node, anchor); return true; }
+    hits = raycaster.intersectObjects([...originDots, ...destDots].filter(m => m.visible));
+    if (hits.length > 0) { openCard(dotToNode(hits[0].object.userData), anchor); return true; }
+    return false;
+  }
+  container.addEventListener('click', (e) => {
+    if (e.target.closest('button') || e.target.closest('.story-card')) return;
+    tryOpenStoryAt(e.clientX, e.clientY);
+  });
+  function handleHover(e) {
+    if (isDragging) return;
+    autoRotate = false; clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => autoRotate = true, 2500);
+    mouse.x = (e.clientX / W) * 2 - 1;
+    mouse.y = -(e.clientY / H) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    const hits = raycaster.intersectObjects(pickables());
+    if (hits.length > 0) {
+      const d = hits[0].object.userData;
+      const tt = tooltipEl.querySelector('.tt-title');
+      const ts = tooltipEl.querySelector('.tt-stat');
+      if (d.type === 'enc') {
+        tt.textContent = (d.node && d.node.title) || (TYPE_LABEL[d.node && d.node.type] || 'Card');
+        ts.textContent = 'Click to read →';
+      } else if (d.type === 'origin') {
+        tt.textContent = d.city;
+        ts.innerHTML = '<strong>' + d.leaders.toLocaleString() + '</strong> leaders trained here';
+      } else if (d.type === 'org') {
+        tt.textContent = d.name.replace(/\s+(Branch|Chapter|Hub)$/i, '');
+        ts.textContent = d.label;
+      } else {
+        tt.textContent = d.label;
+        ts.innerHTML = '<strong>' + d.leaders.toLocaleString() + '</strong> leaders from here';
+      }
+      tooltipEl.style.left = (e.clientX + 14) + 'px';
+      tooltipEl.style.top  = (e.clientY - 10) + 'px';
+      tooltipEl.classList.add('visible');
+      container.style.cursor = 'pointer';
+    } else {
+      hideTooltip();
+      container.style.cursor = 'grab';
+    }
+  }
+  function hideTooltip() { tooltipEl.classList.remove('visible'); }
+
+  // ─── Toggles ───────────────────────────────────────────────────────────────
+  const dotsToggle = document.getElementById('dots-toggle');
+  dotsToggle.addEventListener('click', () => {
+    dotsShown = !dotsShown;
+    dotsToggle.classList.toggle('active', dotsShown);
+    dotGroup.visible = dotsShown;
+    if (virtualDot) virtualDot.visible = dotsShown;
+  });
+
+  // Earth-style picker (Light | Dark | Earth | Live)
+  const pickerButtons = Array.from(document.querySelectorAll('#style-picker button'));
+  pickerButtons.forEach(b => b.addEventListener('click', () => setStyle(b.dataset.style)));
+  setStyle('live');    // preview opens on the live earth
+
+  // ─── Render loop ───────────────────────────────────────────────────────────
+  const clock = new THREE.Clock();
+  let liveFrame = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    if (focus) {
+      // Ease the globe to face the story pin and dolly the camera in.
+      earthGroup.quaternion.slerp(focus.quat, 0.08);
+      camera.position.z += (focus.z - camera.position.z) * 0.08;
+      if (earthGroup.quaternion.angleTo(focus.quat) < 0.01) focus = null;
+    } else if (autoRotate) {
+      earthGroup.rotation.y += 0.0015;
+    }
+    if (currentStyle === 'live') {
+      // Drift the clouds slightly faster than the earth for parallax.
+      cloudsMesh.rotation.y += 0.0006;
+      // Refresh real-time sun direction every ~60 frames (~1s); the sun
+      // moves slowly so per-frame work would be wasted.
+      if ((liveFrame++ & 63) === 0) sun.position.copy(sunDirection()).multiplyScalar(5);
+    }
+    if (orgLayer) orgLayer.update(clock.getElapsedTime(), camera);
+    // Pulse the story halo rings so the pins are easy to spot.
+    const pulse = 1 + 0.25 * Math.sin(clock.getElapsedTime() * 3);
+    storyGroup.children.forEach(c => { if (c.userData.isPulse) c.scale.setScalar(pulse); });
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    W = container.clientWidth; H = container.clientHeight;
+    camera.aspect = W / H; camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  });
+})();
+</script>
+</body>
+</html>

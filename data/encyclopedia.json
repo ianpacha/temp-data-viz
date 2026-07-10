@@ -1,0 +1,2215 @@
+{
+  "_meta": "Phase 1 encyclopedia (sample). Each entry: {id,type,title,lat,lon,facts,links,tags,consent}. Gate: consent==true.",
+  "nodes": [
+    {
+      "id": "branch-africa",
+      "type": "branch",
+      "title": "Africa Branch",
+      "subtitle": "Founded 2014",
+      "lat": 4.0,
+      "lon": 21.0,
+      "date": "2014",
+      "summary": "Regional anchor for the network in Africa.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "region"
+        },
+        {
+          "k": "Founded",
+          "v": 2014
+        }
+      ],
+      "links": [
+        {
+          "rel": "home_of",
+          "id": "leader-sample-amara-k"
+        }
+      ],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-australia-and-the-pacific",
+      "type": "branch",
+      "title": "Australia and the Pacific Branch",
+      "subtitle": "Founded 2006",
+      "lat": -22.3,
+      "lon": 133.8,
+      "date": "2006",
+      "summary": "Regional anchor for the network in Australia and the Pacific.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "region"
+        },
+        {
+          "k": "Founded",
+          "v": 2006
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-brazil",
+      "type": "branch",
+      "title": "Brazil Branch",
+      "subtitle": "Founded 2014",
+      "lat": -11.24,
+      "lon": -51.93,
+      "date": "2014",
+      "summary": "Regional anchor for the network in Brazil.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2014
+        }
+      ],
+      "links": [
+        {
+          "rel": "home_of",
+          "id": "leader-sample-jo-o-p"
+        }
+      ],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-canada",
+      "type": "branch",
+      "title": "Canada Branch",
+      "subtitle": "Founded 2008",
+      "lat": 59.13,
+      "lon": -106.35,
+      "date": "2008",
+      "summary": "Regional anchor for the network in Canada.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2008
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-europe",
+      "type": "branch",
+      "title": "Europe Branch",
+      "subtitle": "Founded 2007",
+      "lat": 50.0,
+      "lon": 10.0,
+      "date": "2007",
+      "summary": "Regional anchor for the network in Europe.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "region"
+        },
+        {
+          "k": "Founded",
+          "v": 2007
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-india-south-asia",
+      "type": "branch",
+      "title": "India & South Asia Branch",
+      "subtitle": "Founded 2008",
+      "lat": 22.0,
+      "lon": 79.0,
+      "date": "2008",
+      "summary": "Regional anchor for the network in India & South Asia.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "region"
+        },
+        {
+          "k": "Founded",
+          "v": 2008
+        }
+      ],
+      "links": [
+        {
+          "rel": "home_of",
+          "id": "leader-sample-priya-s"
+        }
+      ],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-indonesia",
+      "type": "branch",
+      "title": "Indonesia Branch",
+      "subtitle": "Founded 2011",
+      "lat": -2.0,
+      "lon": 118.0,
+      "date": "2011",
+      "summary": "Regional anchor for the network in Indonesia.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2011
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-japan",
+      "type": "branch",
+      "title": "Japan Branch",
+      "subtitle": "Founded 2019",
+      "lat": 39.2,
+      "lon": 138.25,
+      "date": "2019",
+      "summary": "Regional anchor for the network in Japan.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2019
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-latin-america",
+      "type": "branch",
+      "title": "Latin America Branch",
+      "subtitle": "Founded 2009",
+      "lat": 7.57,
+      "lon": -74.3,
+      "date": "2009",
+      "summary": "Regional anchor for the network in Latin America.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "region"
+        },
+        {
+          "k": "Founded",
+          "v": 2009
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-philippines",
+      "type": "branch",
+      "title": "Philippines Branch",
+      "subtitle": "Founded 2016",
+      "lat": 15.0,
+      "lon": 123.95,
+      "date": "2016",
+      "summary": "Regional anchor for the network in Philippines.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2016
+        }
+      ],
+      "links": [],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "branch-united-states",
+      "type": "branch",
+      "title": "United States Branch",
+      "subtitle": "Founded 2006",
+      "lat": 42.73,
+      "lon": -97.57,
+      "date": "2006",
+      "summary": "Regional anchor for the network in United States.",
+      "facts": [
+        {
+          "k": "Scope",
+          "v": "country"
+        },
+        {
+          "k": "Founded",
+          "v": 2006
+        }
+      ],
+      "links": [
+        {
+          "rel": "home_of",
+          "id": "leader-sample-dana-r"
+        }
+      ],
+      "tags": [
+        "branch"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-amsterdam-hub",
+      "type": "hub",
+      "title": "Amsterdam Hub",
+      "subtitle": "Amsterdam",
+      "lat": 52.37,
+      "lon": 4.9,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-barcelona-hub",
+      "type": "hub",
+      "title": "Barcelona Hub",
+      "subtitle": "Barcelona",
+      "lat": 41.39,
+      "lon": 2.17,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-brussels-hub",
+      "type": "hub",
+      "title": "Brussels Hub",
+      "subtitle": "Brussels",
+      "lat": 50.85,
+      "lon": 4.35,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-bucharest-hub",
+      "type": "hub",
+      "title": "Bucharest Hub",
+      "subtitle": "Bucharest",
+      "lat": 44.43,
+      "lon": 26.1,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-budapest-hub",
+      "type": "hub",
+      "title": "Budapest Hub",
+      "subtitle": "Budapest",
+      "lat": 47.5,
+      "lon": 19.04,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-istanbul-hub",
+      "type": "hub",
+      "title": "Istanbul Hub",
+      "subtitle": "Istanbul",
+      "lat": 41.01,
+      "lon": 28.98,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-london-hub",
+      "type": "hub",
+      "title": "London Hub",
+      "subtitle": "London",
+      "lat": 51.51,
+      "lon": -0.13,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-madrid-hub",
+      "type": "hub",
+      "title": "Madrid Hub",
+      "subtitle": "Madrid",
+      "lat": 40.42,
+      "lon": -3.7,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-marseille-hub",
+      "type": "hub",
+      "title": "Marseille Hub",
+      "subtitle": "Marseille",
+      "lat": 43.3,
+      "lon": 5.37,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-milan-hub",
+      "type": "hub",
+      "title": "Milan Hub",
+      "subtitle": "Milan",
+      "lat": 45.46,
+      "lon": 9.19,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-nagykanizsa-hub",
+      "type": "hub",
+      "title": "Nagykanizsa Hub",
+      "subtitle": "Nagykanizsa",
+      "lat": 46.45,
+      "lon": 16.99,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-paris-hub",
+      "type": "hub",
+      "title": "Paris Hub",
+      "subtitle": "Paris",
+      "lat": 48.86,
+      "lon": 2.35,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-poitiers-hub",
+      "type": "hub",
+      "title": "Poitiers Hub",
+      "subtitle": "Poitiers",
+      "lat": 46.58,
+      "lon": 0.34,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-rijeka-hub",
+      "type": "hub",
+      "title": "Rijeka Hub",
+      "subtitle": "Rijeka",
+      "lat": 45.33,
+      "lon": 14.44,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-silesia-hub",
+      "type": "hub",
+      "title": "Silesia Hub",
+      "subtitle": "Silesia",
+      "lat": 50.26,
+      "lon": 19.02,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-tirana-hub",
+      "type": "hub",
+      "title": "Tirana Hub",
+      "subtitle": "Tirana",
+      "lat": 41.33,
+      "lon": 19.82,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-tricity-hub",
+      "type": "hub",
+      "title": "Tricity Hub",
+      "subtitle": "Tricity",
+      "lat": 54.35,
+      "lon": 18.65,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-warsaw-hub",
+      "type": "hub",
+      "title": "Warsaw Hub",
+      "subtitle": "Warsaw",
+      "lat": 52.23,
+      "lon": 21.01,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "In progress"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-berlin-hub",
+      "type": "hub",
+      "title": "Berlin Hub",
+      "subtitle": "Berlin",
+      "lat": 52.52,
+      "lon": 13.41,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "In progress"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-athens-hub",
+      "type": "hub",
+      "title": "Athens Hub",
+      "subtitle": "Athens",
+      "lat": 37.98,
+      "lon": 23.73,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-helsinki-hub",
+      "type": "hub",
+      "title": "Helsinki Hub",
+      "subtitle": "Helsinki",
+      "lat": 60.17,
+      "lon": 24.94,
+      "date": "2025",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-europe"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-greater-victoria-climate-hub",
+      "type": "hub",
+      "title": "Greater Victoria Climate Hub",
+      "subtitle": "Greater Victoria Climate Hub",
+      "lat": 48.4284,
+      "lon": -123.3656,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-calgary-climate-hub",
+      "type": "hub",
+      "title": "Calgary Climate Hub",
+      "subtitle": "Calgary Climate Hub",
+      "lat": 51.0447,
+      "lon": -114.0719,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-edmonton-climate-hub",
+      "type": "hub",
+      "title": "Edmonton Climate Hub",
+      "subtitle": "Edmonton Climate Hub",
+      "lat": 53.5461,
+      "lon": -113.4937,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-cowichan-climate-hub",
+      "type": "hub",
+      "title": "Cowichan Climate Hub",
+      "subtitle": "Cowichan Climate Hub",
+      "lat": 48.7373,
+      "lon": -123.6216,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-east-kootenay-climate-hub",
+      "type": "hub",
+      "title": "East Kootenay Climate Hub",
+      "subtitle": "East Kootenay Climate Hub",
+      "lat": 50.1284,
+      "lon": -115.7568,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-west-kootenay-climate-hub",
+      "type": "hub",
+      "title": "West Kootenay Climate Hub",
+      "subtitle": "West Kootenay Climate Hub",
+      "lat": 49.4556,
+      "lon": -117.5215,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-maple-ridge-climate-hub",
+      "type": "hub",
+      "title": "Maple Ridge Climate Hub",
+      "subtitle": "Maple Ridge Climate Hub",
+      "lat": 49.2193,
+      "lon": -122.5984,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-nanaimo-climate-hub",
+      "type": "hub",
+      "title": "Nanaimo Climate Hub",
+      "subtitle": "Nanaimo Climate Hub",
+      "lat": 49.1659,
+      "lon": -123.9401,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-smithers-climate-hub",
+      "type": "hub",
+      "title": "Smithers Climate Hub",
+      "subtitle": "Smithers Climate Hub",
+      "lat": 54.7824,
+      "lon": -127.1686,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-biosphere-institute-of-the-bow-valley",
+      "type": "hub",
+      "title": "Biosphere Institute of the Bow Valley",
+      "subtitle": "Biosphere Institute of the Bow Valley",
+      "lat": 51.1711,
+      "lon": -115.6609,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-environment-lethbridge",
+      "type": "hub",
+      "title": "Environment Lethbridge",
+      "subtitle": "Environment Lethbridge",
+      "lat": 49.6956,
+      "lon": -112.8451,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-regina-envirocollective",
+      "type": "hub",
+      "title": "Regina - EnviroCollective",
+      "subtitle": "Regina - EnviroCollective",
+      "lat": 50.4452,
+      "lon": -104.6189,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-sault-climate-hub",
+      "type": "hub",
+      "title": "Sault Climate Hub",
+      "subtitle": "Sault Climate Hub",
+      "lat": 46.5136,
+      "lon": -84.3358,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-london-climate-action",
+      "type": "hub",
+      "title": "London Climate Action",
+      "subtitle": "London Climate Action",
+      "lat": 42.9849,
+      "lon": -81.2453,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-kingston-climate-hub",
+      "type": "hub",
+      "title": "Kingston Climate Hub",
+      "subtitle": "Kingston Climate Hub",
+      "lat": 44.2312,
+      "lon": -76.486,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-montreal-climate-coalition",
+      "type": "hub",
+      "title": "Montreal Climate Coalition",
+      "subtitle": "Montreal Climate Coalition",
+      "lat": 45.5019,
+      "lon": -73.5674,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-climate-coalition-laval",
+      "type": "hub",
+      "title": "Climate Coalition Laval",
+      "subtitle": "Climate Coalition Laval",
+      "lat": 45.6066,
+      "lon": -73.7124,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-halifax-climate-hub",
+      "type": "hub",
+      "title": "Halifax Climate Hub",
+      "subtitle": "Halifax Climate Hub",
+      "lat": 44.6476,
+      "lon": -63.5728,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-okanagan-climate-hub",
+      "type": "hub",
+      "title": "Okanagan Climate Hub",
+      "subtitle": "Okanagan Climate Hub",
+      "lat": 49.9474,
+      "lon": -119.5588,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-oakville-climate-hub",
+      "type": "hub",
+      "title": "Oakville Climate Hub",
+      "subtitle": "Oakville Climate Hub",
+      "lat": 43.4639,
+      "lon": -79.6853,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-peterborough-climate-hub-4rg",
+      "type": "hub",
+      "title": "Peterborough Climate Hub - 4RG",
+      "subtitle": "Peterborough Climate Hub - 4RG",
+      "lat": 44.3047,
+      "lon": -78.32,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-saskatoon-climate-hub",
+      "type": "hub",
+      "title": "Saskatoon Climate Hub",
+      "subtitle": "Saskatoon Climate Hub",
+      "lat": 52.1579,
+      "lon": -106.6702,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-saint-john-climate-action-hub",
+      "type": "hub",
+      "title": "Saint John Climate Action Hub",
+      "subtitle": "Saint John Climate Action Hub",
+      "lat": 45.2733,
+      "lon": -66.0633,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-scarborough-environmental-association",
+      "type": "hub",
+      "title": "Scarborough Environmental Association",
+      "subtitle": "Scarborough Environmental Association",
+      "lat": 43.7764,
+      "lon": -79.2318,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-manitoba-climate-action-team",
+      "type": "hub",
+      "title": "Manitoba Climate Action Team",
+      "subtitle": "Manitoba Climate Action Team",
+      "lat": 49.8954,
+      "lon": -97.1385,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-qu-bec-city-climate-hub-c3-qu-bec",
+      "type": "hub",
+      "title": "Québec City Climate Hub | C3 Québec",
+      "subtitle": "Québec City Climate Hub | C3 Québec",
+      "lat": 46.8172,
+      "lon": -71.0961,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-biodiversity-and-climate-action-niagara",
+      "type": "hub",
+      "title": "Biodiversity and Climate Action Niagara",
+      "subtitle": "Biodiversity and Climate Action Niagara",
+      "lat": 43.0582,
+      "lon": -79.2902,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-sustainable-orillia",
+      "type": "hub",
+      "title": "Sustainable Orillia",
+      "subtitle": "Sustainable Orillia",
+      "lat": 44.6082,
+      "lon": -79.4197,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-sustainable-milton",
+      "type": "hub",
+      "title": "Sustainable Milton",
+      "subtitle": "Sustainable Milton",
+      "lat": 43.5183,
+      "lon": -79.8774,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-climate-change-task-force-unama-ki-cape-breton-island",
+      "type": "hub",
+      "title": "Climate Change Task Force Unama'ki / Cape Breton Island",
+      "subtitle": "Climate Change Task Force Unama'ki / Cape Breton Island",
+      "lat": 46.2487,
+      "lon": -60.8518,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-fredericton-climate-hub",
+      "type": "hub",
+      "title": "Fredericton Climate Hub",
+      "subtitle": "Fredericton Climate Hub",
+      "lat": 45.9636,
+      "lon": -66.6431,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-new-westminister-climate-action-hub",
+      "type": "hub",
+      "title": "New Westminister Climate Action Hub",
+      "subtitle": "New Westminister Climate Action Hub",
+      "lat": 49.2057,
+      "lon": -122.911,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-richmond-climate-hub",
+      "type": "hub",
+      "title": "Richmond Climate Hub",
+      "subtitle": "Richmond Climate Hub",
+      "lat": 49.1691,
+      "lon": -123.1342,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-climate-neighbours-north-york",
+      "type": "hub",
+      "title": "Climate Neighbours North York",
+      "subtitle": "Climate Neighbours North York",
+      "lat": 43.7629,
+      "lon": -79.4121,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-climate-action-richmond-hill",
+      "type": "hub",
+      "title": "Climate Action Richmond Hill",
+      "subtitle": "Climate Action Richmond Hill",
+      "lat": 43.8694,
+      "lon": -79.4217,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "hub-cowbay-environmental-coalition",
+      "type": "hub",
+      "title": "Cowbay Environmental Coalition",
+      "subtitle": "Cowbay Environmental Coalition",
+      "lat": 46.1362,
+      "lon": -59.8797,
+      "date": "2024",
+      "summary": "Community climate hub.",
+      "facts": [
+        {
+          "k": "Status",
+          "v": "Active"
+        },
+        {
+          "k": "Founded",
+          "v": 2024
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-canada"
+        }
+      ],
+      "tags": [
+        "hub"
+      ],
+      "consent": true
+    },
+    {
+      "id": "leader-sample-dana-r",
+      "type": "leader",
+      "title": "Sample: Dana R.",
+      "subtitle": "Education · United States",
+      "lat": 33.75,
+      "lon": -84.39,
+      "date": "2019",
+      "summary": "Sample quote — the training changed how I teach my students about climate.",
+      "body": "Sample story body. Replace with a real, consented leader story from Salesforce.",
+      "media": {
+        "photo_url": null
+      },
+      "facts": [
+        {
+          "k": "Sector",
+          "v": "Education"
+        },
+        {
+          "k": "City",
+          "v": "Atlanta"
+        },
+        {
+          "k": "Trained",
+          "v": 2019
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-united-states"
+        }
+      ],
+      "tags": [
+        "featured",
+        "story",
+        "education",
+        "leader"
+      ],
+      "consent": true
+    },
+    {
+      "id": "leader-sample-jo-o-p",
+      "type": "leader",
+      "title": "Sample: João P.",
+      "subtitle": "Policy · Brazil",
+      "lat": -22.91,
+      "lon": -43.17,
+      "date": "2014",
+      "summary": "Sample quote — after Rio I helped pass a municipal climate plan.",
+      "body": "Sample story body. Replace with real consented content.",
+      "media": {
+        "photo_url": null
+      },
+      "facts": [
+        {
+          "k": "Sector",
+          "v": "Policy"
+        },
+        {
+          "k": "City",
+          "v": "Rio de Janeiro"
+        },
+        {
+          "k": "Trained",
+          "v": 2014
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-brazil"
+        }
+      ],
+      "tags": [
+        "featured",
+        "story",
+        "policy",
+        "leader"
+      ],
+      "consent": true
+    },
+    {
+      "id": "leader-sample-priya-s",
+      "type": "leader",
+      "title": "Sample: Priya S.",
+      "subtitle": "Community · India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "date": "2008",
+      "summary": "Sample quote — I built a network of 200 youth advocates.",
+      "body": "Sample story body. Replace with real consented content.",
+      "media": {
+        "photo_url": null
+      },
+      "facts": [
+        {
+          "k": "Sector",
+          "v": "Community"
+        },
+        {
+          "k": "City",
+          "v": "New Delhi"
+        },
+        {
+          "k": "Trained",
+          "v": 2008
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-india-south-asia"
+        }
+      ],
+      "tags": [
+        "featured",
+        "story",
+        "youth",
+        "leader"
+      ],
+      "consent": true
+    },
+    {
+      "id": "leader-sample-amara-k",
+      "type": "leader",
+      "title": "Sample: Amara K.",
+      "subtitle": "Agriculture · Kenya",
+      "lat": -1.29,
+      "lon": 36.82,
+      "date": "2025",
+      "summary": "Sample quote — climate-smart farming reached 40 villages.",
+      "body": "Sample story body. Replace with real consented content.",
+      "media": {
+        "photo_url": null
+      },
+      "facts": [
+        {
+          "k": "Sector",
+          "v": "Agriculture"
+        },
+        {
+          "k": "City",
+          "v": "Nairobi"
+        },
+        {
+          "k": "Trained",
+          "v": 2025
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-africa"
+        }
+      ],
+      "tags": [
+        "featured",
+        "story",
+        "agriculture",
+        "leader"
+      ],
+      "consent": true
+    },
+    {
+      "id": "leader-sample-liam-t",
+      "type": "leader",
+      "title": "Sample: Liam T.",
+      "subtitle": "Business · Australia",
+      "lat": -33.87,
+      "lon": 151.21,
+      "date": "2006",
+      "summary": "Sample quote — our company hit net-zero five years early.",
+      "body": "Sample story body. Replace with real consented content.",
+      "media": {
+        "photo_url": null
+      },
+      "facts": [
+        {
+          "k": "Sector",
+          "v": "Business"
+        },
+        {
+          "k": "City",
+          "v": "Sydney"
+        },
+        {
+          "k": "Trained",
+          "v": 2006
+        }
+      ],
+      "links": [
+        {
+          "rel": "rolls_up_to",
+          "id": "branch-australia-pacific"
+        }
+      ],
+      "tags": [
+        "featured",
+        "story",
+        "business",
+        "leader"
+      ],
+      "consent": true
+    }
+  ]
+}
